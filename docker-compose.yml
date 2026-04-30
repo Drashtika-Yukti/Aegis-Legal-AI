@@ -5,6 +5,13 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    networks:
+      - nexus-net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     restart: always
 
   nexus-ui:
@@ -13,7 +20,10 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      - nexus-engine
+      nexus-engine:
+        condition: service_healthy
+    networks:
+      - nexus-net
     restart: always
 
   nexus-ingestor:
@@ -21,4 +31,10 @@ services:
       context: ./services/ingestor
     ports:
       - "8081:8081"
+    networks:
+      - nexus-net
     restart: always
+
+networks:
+  nexus-net:
+    driver: bridge

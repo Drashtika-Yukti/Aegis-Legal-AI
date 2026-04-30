@@ -1,4 +1,5 @@
 import sqlite3
+import os
 import time
 from typing import List, Dict, Optional
 
@@ -11,6 +12,7 @@ class NexusMemory:
         self._init_db()
 
     def _init_db(self):
+        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS conversation (

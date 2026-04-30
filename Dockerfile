@@ -3,7 +3,7 @@ FROM python:3.11-slim as builder
 
 WORKDIR /app
 
-# Install build dependencies
+# Install build-essential for any C-based python extensions
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
@@ -17,11 +17,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy installed dependencies from builder
+# Copy ONLY necessary dependencies from builder
 COPY --from=builder /install /usr/local
 
-# Copy application code
-COPY . .
+# SURGICAL COPY: Only copy what the engine needs
+COPY core/ ./core/
+COPY agents/ ./agents/
+COPY utils/ ./utils/
+COPY main.py .
+COPY requirements.txt .
 
 # Download spaCy model (Crucial for Privacy Shield)
 RUN python -m spacy download en_core_web_sm
@@ -29,5 +33,5 @@ RUN python -m spacy download en_core_web_sm
 # Expose FastAPI port
 EXPOSE 8000
 
-# Run the production server
+# Run the production server using the corrected uvicorn module syntax
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

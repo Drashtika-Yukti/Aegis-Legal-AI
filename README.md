@@ -65,6 +65,19 @@ The project includes a fully automated DevOps pipeline using **GitHub Actions**:
 
 ---
 
+## ⚙️ CI/CD Pipeline & Deployment Checklist
+
+The project includes a fully automated DevOps pipeline using **GitHub Actions**. To ensure the "Green Signal" in your repository, you must add the following **Secrets** to your GitHub Repository Settings (`Settings > Secrets and variables > Actions`):
+
+1.  `GROQ_API_KEY`: Your Groq API Key.
+2.  `COHERE_API_KEY`: Your Cohere API Key.
+3.  `SUPABASE_URL`: Your Supabase Project URL.
+4.  `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase Service Role Key.
+
+Once these are added, every push to `main` will automatically build your images and verify them with real integration tests.
+
+---
+
 ## 📜 License
 This project is for professional enterprise use and adheres to strict data privacy standards.
 
