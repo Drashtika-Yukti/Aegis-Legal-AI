@@ -32,12 +32,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Lowercase IMAGE_NAME
+        run: |
+          echo "IMAGE_NAME_LC=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+
       - name: Build and push Engine Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-engine:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-engine:latest
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Ingestor Docker image
@@ -45,4 +49,4 @@ jobs:
         with:
           context: ./services/ingestor
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-ingestor:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-ingestor:latest
