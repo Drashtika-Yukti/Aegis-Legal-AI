@@ -24,6 +24,15 @@ jobs:
           pip install pytest flake8
           python -m spacy download en_core_web_sm
 
+      - name: Run Unit Tests
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          pytest tests/
+
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names

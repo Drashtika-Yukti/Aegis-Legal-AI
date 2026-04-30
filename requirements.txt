@@ -9,6 +9,8 @@ python-dotenv
 pydantic
 cohere
 pinecone-client
-# For local LLM integration
 ollama
 spacy
+supabase
+langchain-supabase
+ragas
