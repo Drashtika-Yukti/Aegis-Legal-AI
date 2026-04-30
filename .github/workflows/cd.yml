@@ -28,7 +28,7 @@ jobs:
 
       - name: Lowercase IMAGE_NAME
         run: |
-          echo "IMAGE_NAME_LC=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "IMAGE_NAME_LC=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
