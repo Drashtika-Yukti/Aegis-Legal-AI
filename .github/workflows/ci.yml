@@ -31,37 +31,12 @@ jobs:
           # exit-zero treats all errors as warnings.
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-      - name: Run Real Integration Tests
+      - name: Run Basic Unit Tests
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
+          # Only run non-AI heavy unit tests to save rate limits
           pytest tests/test_core.py
-
-  evaluation-suite:
-    needs: test-and-lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install Dependencies
-        run: |
-          pip install -r requirements.txt
-          python -m spacy download en_core_web_sm
-
-      - name: Run RAGAS & DeepEval
-        env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          OPENAI_API_KEY: ${{ secrets.GROQ_API_KEY }} # DeepEval/RAGAS fallback
-        run: |
-          python tests/eval/ragas_suite.py
-          pytest tests/eval/deep_eval_suite.py
