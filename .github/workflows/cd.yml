@@ -50,3 +50,10 @@ jobs:
           context: ./services/ingestor
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-ingestor:latest
+
+      - name: Build and push UI Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./web
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-ui:latest
