@@ -4,11 +4,11 @@ from core.graph import nexus_graph
 from langchain_core.messages import HumanMessage
 from core.logger import get_logger
 
-logger = get_logger("NexusEngine")
+logger = get_logger("AegisEngine")
 
-def run_nexus(query: str, session_id: str = "default"):
+def run_aegis(query: str, session_id: str = "default"):
     """
-    Nexus Master Entry Point.
+    Aegis Master Entry Point.
     """
     logger.info(f"Session {session_id} | Processing query.")
 
@@ -17,7 +17,7 @@ def run_nexus(query: str, session_id: str = "default"):
     
     if intent_result.category == "GREETING":
         return {
-            "answer": "Hello! I am your Nexus Legal Intelligence Assistant. How can I help you today?", 
+            "answer": "Hello! I am Aegis, your Legal Intelligence Assistant. How can I help you today?", 
             "intent": "GREETING",
             "hallucination_check": True
         }

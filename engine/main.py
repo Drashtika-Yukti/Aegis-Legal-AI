@@ -1,14 +1,14 @@
 """
-Nexus Legal Intelligence Engine - Production API
+Aegis Legal Intelligence Engine - Production API
 Handles incoming queries, session management, and orchestrates the AI Agentic flow.
 """
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from core.orchestrator import run_nexus
+from core.orchestrator import run_aegis
 
-app = FastAPI(title="Nexus Legal Intelligence API")
+app = FastAPI(title="Aegis Legal Intelligence API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,7 +24,7 @@ class QueryRequest(BaseModel):
 @app.post("/chat")
 async def chat(request: QueryRequest):
     try:
-        response = run_nexus(request.query, request.session_id)
+        response = run_aegis(request.query, request.session_id)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

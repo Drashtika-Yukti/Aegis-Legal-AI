@@ -24,7 +24,7 @@ COPY --from=builder /install /usr/local
 COPY core/ ./core/
 COPY agents/ ./agents/
 COPY utils/ ./utils/
-COPY app.py .
+COPY main.py .
 COPY requirements.txt .
 
 # Download spaCy model (Crucial for Privacy Shield)
@@ -34,4 +34,4 @@ RUN python -m spacy download en_core_web_sm
 EXPOSE 8000
 
 # Run the production server using the corrected uvicorn module syntax
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
