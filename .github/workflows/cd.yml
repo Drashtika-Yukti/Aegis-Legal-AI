@@ -50,3 +50,21 @@ jobs:
           context: ./workers/ingestor
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-ingestor:latest
+
+  deploy-to-hf:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to Hugging Face Spaces
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # Use the HF_TOKEN to push to the Space remote
+          # The remote URL format: https://[USERNAME]:[TOKEN]@huggingface.co/spaces/[USERNAME]/[SPACE_NAME]
+          git push --force https://x-token:$HF_TOKEN@huggingface.co/spaces/${{ secrets.HF_USERNAME }}/${{ secrets.HF_SPACE_NAME }} main
