@@ -1,4 +1,4 @@
-name: Nexus CD Pipeline
+name: Aegis CD Pipeline
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
       - name: Build and push Engine Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./engine
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-engine:latest
           labels: ${{ steps.meta.outputs.labels }}
@@ -47,6 +47,6 @@ jobs:
       - name: Build and push Ingestor Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./services/ingestor
+          context: ./workers/ingestor
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}-ingestor:latest
