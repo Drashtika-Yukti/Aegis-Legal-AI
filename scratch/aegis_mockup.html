@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aegis Legal AI - Intellectual Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#775a19",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#261900",
+                        "on-secondary-container": "#785a1a",
+                        "error": "#ba1a1a",
+                        "primary-container": "#101c2f",
+                        "tertiary-fixed-dim": "#bcc7dd",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#d8e3fa",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed": "#d7e3fd",
+                        "on-tertiary-fixed": "#111c2c",
+                        "surface-bright": "#f7fafc",
+                        "on-primary-fixed-variant": "#3c475c",
+                        "background": "#f7fafc",
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "on-surface-variant": "#45474d",
+                        "outline": "#75777d",
+                        "on-tertiary-container": "#798499",
+                        "surface-dim": "#d7dadc",
+                        "outline-variant": "#c5c6cd",
+                        "surface": "#f7fafc",
+                        "surface-container": "#ebeef0",
+                        "secondary-fixed": "#ffdea5",
+                        "on-background": "#181c1e",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e5e9eb",
+                        "on-primary-fixed": "#101c2f",
+                        "surface-tint": "#535f75",
+                        "secondary-container": "#fed488",
+                        "surface-container-low": "#f1f4f6",
+                        "primary-fixed-dim": "#bbc7e1",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "primary": "#000000",
+                        "on-surface": "#181c1e",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d3133",
+                        "tertiary": "#000000",
+                        "tertiary-container": "#111c2c",
+                        "on-primary-container": "#79849c",
+                        "inverse-primary": "#bbc7e1",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#e9c176",
+                        "inverse-on-surface": "#eef1f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "md": "24px",
+                        "margin": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Noto Serif"],
+                        "display-lg": ["Noto Serif"],
+                        "title-sm": ["Noto Serif"],
+                        "data-mono": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold font-serif text-[#0A1629] tracking-widest">Aegis Legal</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-serif tracking-tight uppercase text-xs font-bold text-slate-500 hover:text-[#0A1629] transition-colors py-4" href="#">Workspace</a>
+<a class="font-serif tracking-tight uppercase text-xs font-bold text-amber-600 border-b-2 border-amber-600 pb-4" href="#">Case Files</a>
+<a class="font-serif tracking-tight uppercase text-xs font-bold text-slate-500 hover:text-[#0A1629] transition-colors py-4" href="#">Insights</a>
+<a class="font-serif tracking-tight uppercase text-xs font-bold text-slate-500 hover:text-[#0A1629] transition-colors py-4" href="#">Repository</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="font-serif tracking-tight uppercase text-xs font-bold text-amber-600 hover:bg-slate-50 px-4 py-2 rounded-DEFAULT transition-all duration-200">Legal AI</button>
+<button class="font-serif tracking-tight uppercase text-xs font-bold text-slate-500 hover:text-[#0A1629] hover:bg-slate-50 px-4 py-2 rounded-DEFAULT transition-all duration-200 border border-slate-200">Client Portal</button>
+<div class="flex items-center gap-2 text-slate-500">
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-slate-50 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Workspace Container -->
+<main class="flex-grow flex flex-col md:flex-row w-full max-w-[1600px] mx-auto bg-surface overflow-hidden">
+<!-- Left Panel: Document Vault (30%) -->
+<aside class="w-full md:w-[30%] border-r border-outline-variant/30 flex flex-col bg-surface-container-lowest h-[calc(100vh-64px)] overflow-y-auto">
+<div class="p-md border-b border-outline-variant/30 sticky top-0 bg-surface-container-lowest z-10">
+<h2 class="font-title-sm text-title-sm text-on-surface mb-sm">Document Vault</h2>
+<!-- Upload Area -->
+<div class="border border-dashed border-outline-variant rounded-lg p-md text-center hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline group-hover:text-secondary mb-xs" style="font-variation-settings: 'FILL' 0;">cloud_upload</span>
+<p class="font-data-mono text-data-mono text-on-surface-variant">Upload New Document</p>
+<p class="font-label-caps text-label-caps text-outline mt-xs">PDF, DOCX, TXT</p>
+</div>
+</div>
+<!-- Document List -->
+<div class="p-base flex flex-col gap-base">
+<div class="p-sm border border-outline-variant/30 bg-surface flex items-center gap-sm relative border-l-2 border-l-secondary">
+<span class="material-symbols-outlined text-secondary">description</span>
+<div class="flex-grow min-w-0">
+<p class="font-data-mono text-data-mono text-on-surface truncate">Merger Agreement v2.pdf</p>
+<p class="font-label-caps text-label-caps text-outline">Analyzed • 2.4 MB</p>
+</div>
+</div>
+<div class="p-sm border border-outline-variant/30 hover:bg-surface-container-low transition-colors flex items-center gap-sm cursor-pointer">
+<span class="material-symbols-outlined text-outline">description</span>
+<div class="flex-grow min-w-0">
+<p class="font-data-mono text-data-mono text-on-surface-variant truncate">Risk Assessment.docx</p>
+<p class="font-label-caps text-label-caps text-outline">Pending • 1.1 MB</p>
+</div>
+</div>
+<div class="p-sm border border-outline-variant/30 hover:bg-surface-container-low transition-colors flex items-center gap-sm cursor-pointer">
+<span class="material-symbols-outlined text-outline">description</span>
+<div class="flex-grow min-w-0">
+<p class="font-data-mono text-data-mono text-on-surface-variant truncate">Client Intake Form.pdf</p>
+<p class="font-label-caps text-label-caps text-outline">Reviewed • 0.8 MB</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Panel: AI Research Assistant (70%) -->
+<section class="w-full md:w-[70%] flex flex-col bg-surface h-[calc(100vh-64px)] relative">
+<!-- AI Header -->
+<div class="px-gutter py-md border-b border-outline-variant/30 flex justify-between items-center bg-surface sticky top-0 z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<h1 class="font-headline-md text-title-sm text-on-surface">AI Research Assistant</h1>
+</div>
+<div class="flex gap-sm">
+<button class="font-label-caps text-label-caps text-on-surface border border-outline-variant px-sm py-xs hover:border-secondary transition-colors">Export Log</button>
+<button class="font-label-caps text-label-caps text-secondary border border-secondary px-sm py-xs hover:bg-secondary/10 transition-colors">Clear Context</button>
+</div>
+</div>
+<!-- Chat/Data Canvas -->
+<div class="flex-grow p-gutter overflow-y-auto flex flex-col gap-lg">
+<!-- User Query -->
+<div class="self-end max-w-[80%]">
+<div class="bg-surface-container border border-outline-variant/30 p-md">
+<p class="font-body-md text-body-md text-on-surface">Please analyze Section 4.2 (Indemnification) of the uploaded Merger Agreement v2.pdf. Highlight any non-standard liabilities and provide a risk assessment.</p>
+</div>
+<p class="font-label-caps text-label-caps text-outline mt-xs text-right">User • 10:42 AM</p>
+</div>
+<!-- AI Response Panel -->
+<div class="self-start max-w-[95%] w-full">
+<div class="bg-surface-container-lowest border border-outline-variant/50 p-0 flex flex-col shadow-[0px_4px_20px_rgba(10,22,41,0.04)]">
+<!-- Panel Header -->
+<div class="bg-surface-container-low border-b border-outline-variant/30 p-sm flex items-center justify-between">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary text-[16px]">analytics</span>
+<span class="font-data-mono text-data-mono text-on-surface uppercase tracking-wider">Analysis: Section 4.2 (Indemnification)</span>
+</div>
+<span class="font-label-caps text-label-caps bg-secondary/10 text-secondary px-xs py-[2px]">Execution: 1.2s</span>
+</div>
+<!-- Panel Body -->
+<div class="p-md flex flex-col gap-md">
+<p class="font-body-md text-body-md text-on-surface">The indemnification clause contains several deviations from standard market practice. The most critical issue is the absence of a liability cap, exposing the acquiring entity to potentially unlimited damages.</p>
+<!-- Structured Data Block -->
+<div class="border-l-2 border-secondary pl-sm bg-surface-container p-sm">
+<h4 class="font-title-sm text-[16px] text-on-surface mb-xs">Key Findings</h4>
+<ul class="font-body-md text-[14px] text-on-surface-variant flex flex-col gap-xs list-disc list-inside">
+<li><strong>Uncapped Liability:</strong> No monetary limit is specified for claims arising from breaches of intellectual property representations.</li>
+<li><strong>Survival Period:</strong> Representations survive for 5 years, exceeding the typical 18-24 month standard.</li>
+<li><strong>Materiality Scrape:</strong> Present, favoring the buyer in determining damages.</li>
+</ul>
+</div>
+<!-- Risk Score Module -->
+<div class="border border-outline-variant/30 p-sm flex items-center justify-between bg-surface">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">Calculated Risk Score</span>
+<span class="font-headline-md text-title-sm text-error">High Exposure (8.5/10)</span>
+</div>
+<div class="w-[200px] h-2 bg-surface-variant overflow-hidden">
+<div class="h-full bg-error" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Citations -->
+<div>
+<h4 class="font-label-caps text-label-caps text-outline mb-xs">Citations &amp; References</h4>
+<div class="flex gap-xs flex-wrap">
+<span class="font-data-mono text-[12px] bg-surface border border-outline-variant px-xs py-[2px] text-on-surface-variant cursor-pointer hover:border-secondary transition-colors">Doc: Merger_v2.pdf, p.14</span>
+<span class="font-data-mono text-[12px] bg-surface border border-outline-variant px-xs py-[2px] text-on-surface-variant cursor-pointer hover:border-secondary transition-colors">Precedent: Smith v. Jones (2019)</span>
+</div>
+</div>
+</div>
+</div>
+<p class="font-label-caps text-label-caps text-outline mt-xs">Aegis AI • 10:43 AM</p>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-md border-t border-outline-variant/30 bg-surface-container-lowest sticky bottom-0">
+<div class="relative flex items-end border border-outline-variant focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-all bg-surface">
+<textarea class="w-full bg-transparent border-none font-body-md text-body-md text-on-surface p-sm resize-none focus:ring-0 min-h-[60px]" placeholder="Enter command or query..."></textarea>
+<div class="p-xs flex items-center gap-xs">
+<button class="p-xs text-outline hover:text-secondary transition-colors"><span class="material-symbols-outlined">attach_file</span></button>
+<button class="bg-secondary text-on-secondary px-sm py-xs font-label-caps text-label-caps hover:bg-on-secondary-container transition-colors flex items-center gap-xs">
+                            Execute
+                            <span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</div>
+<div class="flex justify-between items-center mt-xs px-xs">
+<span class="font-label-caps text-label-caps text-outline">Model: Aegis-Legal-v4</span>
+<span class="font-label-caps text-label-caps text-outline">Use / for quick commands</span>
+</div>
+</div>
+</section>
+</main>
+</body></html>

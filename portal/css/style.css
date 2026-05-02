@@ -1,0 +1,52 @@
+/* Aegis Premium UI Refinements */
+:root {
+    --primary-font: 'Inter', sans-serif;
+    --serif-font: 'Noto Serif', serif;
+}
+
+body {
+    font-family: var(--primary-font);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-serif {
+    font-family: var(--serif-font);
+}
+
+/* Custom Scrollbar for a sleek look */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+/* Animation for the status text */
+@keyframes pulse-opacity {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.status-text {
+    animation: pulse-opacity 2s infinite ease-in-out;
+}
+
+/* Chat Canvas Transitions */
+#chat-canvas {
+    scroll-behavior: smooth;
+}
+
+textarea:focus {
+    outline: none;
+}

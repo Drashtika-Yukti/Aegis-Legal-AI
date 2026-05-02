@@ -1,57 +1,78 @@
----
-title: Aegis Legal AI
-emoji: ⚖️
-colorFrom: gray
-colorTo: green
-sdk: docker
-pinned: false
----
+# 🏛️ Aegis Genesis (v1.0.0)
+### *Premium Legal Intelligence & Intellectual Workspace*
 
-# ⚖️ Aegis Legal AI v2.0
-![Aegis CI Pipeline](https://github.com/Drashtika-Yukti/LexiGuard-AI-Engine/actions/workflows/ci.yml/badge.svg)
-![Aegis CD Pipeline](https://github.com/Drashtika-Yukti/LexiGuard-AI-Engine/actions/workflows/cd.yml/badge.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-
-**Aegis Legal AI** is a premium, enterprise-grade Legal Intelligence platform. It leverages **Agentic RAG** and **Multi-Agent Orchestration** to provide high-fidelity legal reasoning while strictly enforcing data privacy through local PII masking.
+Aegis is an enterprise-grade AI Legal Engine designed for high-concurrency research, document analysis, and automated legal reasoning. Built on an asynchronous, multi-agent architecture, it combines the privacy of a local vault with the power of live web intelligence.
 
 ---
 
-## 🏛️ Enterprise Architecture
-The project is structured as a robust monorepo for maximum scalability and professional integration:
-
-- **`engine/`**: The core AI intelligence (FastAPI + LangGraph + Groq).
-- **`studio/`**: Premium legal workspace (React + Vite + Axios).
-- **`workers/`**: Specialized high-performance microservices (Golang Ingestor).
-- **`evals/`**: Trust & Evaluation layer (RAGAS + DeepEval).
-- **`deploy/`**: Infrastructure and orchestration (Docker + K8s).
+## 🌟 Core Pillars
+*   **The Nexus Engine**: A multi-agent LangGraph architecture featuring specialized nodes for **Shielding**, **Retrieval**, **Utility**, and **Editorial Polishing**.
+*   **Privacy-First Design**: Native PII/PHI masking (The Shielding Agent) ensures that sensitive case data never reaches the LLM in its raw form.
+*   **Aegis Portal V2**: An ultra-lightweight, high-performance Vanilla JS workspace that delivers token-by-token streaming with sub-200ms latency.
+*   **Verified Intelligence**: Hallucination detection and relevance grading are baked into every research cycle.
 
 ---
 
-## 🚀 Key Features
-*   **Agentic RAG**: Self-grading retrieval system with hallucination detection.
-*   **Privacy Guard**: Local NER-based PII masking via spaCy before cloud transmission.
-*   **Aegis Studio**: A solid, professional UI designed for high-trust legal environments.
-*   **Automated Trust**: Integrated RAGAS and DeepEval metrics for legal integrity.
-*   **High Speed**: Legal ingestion powered by a high-performance Go worker.
-
----
-
-## ⚙️ Deployment
-```powershell
-docker-compose up --build
+## 🏗️ Technical Architecture
+```mermaid
+graph TD
+    User[User/Portal] -->|Query| Router{Intent Router}
+    Router -->|Social| Response[Instant Social Response]
+    Router -->|Legal| Shield[Shielding Agent: PII Masking]
+    
+    subgraph Nexus_Graph [Aegis Nexus Graph]
+        Shield -->|Parallel| Retriever[Vector Retriever]
+        Shield -->|Parallel| Utility[Utility Agent: Tools/Web]
+        Retriever --> Grade[Relevance Grader]
+        Grade --> Generate[Generator: Legal Reasoning]
+        Utility --> Generate
+        Generate --> Judge[Hallucination Check]
+        Judge --> Polish[Editorial Agent: Formatting]
+    end
+    
+    Polish --> Unshield[Shielding Agent: Unmasking]
+    Unshield -->|Streaming SSE| User
 ```
-- **Aegis Studio**: http://localhost:5173
-- **Aegis Engine API**: http://localhost:8000/docs
 
 ---
 
-## 🛡️ Trust & Evaluation
-Aegis includes a dedicated `evals/` ecosystem to ensure legal accuracy:
-*   **RAGAS**: Faithfulness & Context Precision.
-*   **DeepEval**: Assertive legal unit testing.
-*   **LangSmith**: Complete observability and decision tracing.
+## 🛠️ Tech Stack
+*   **Backend**: Python 3.11+, FastAPI (Async/Streaming), LangGraph, LangChain.
+*   **Intelligence**: Groq (Llama-3.3 70B & 8B), Cohere Embeddings.
+*   **Database**: Supabase (pgvector), PostgreSQL.
+*   **Frontend**: Vanilla JavaScript (ES6+), Tailwind CSS, Material Icons.
+*   **DevOps**: Docker, Docker-Compose, GitHub Actions.
 
 ---
 
-## 📜 License
-This project is for professional enterprise use and adheres to strict data privacy standards. MIT Licensed.
+## 🚀 Quick Start (Production)
+
+### 1. Environment Configuration
+Create a `secrets.txt` (or `.env`) with the following:
+```bash
+GROQ_API_KEY=your_key
+SUPABASE_URL=your_url
+SUPABASE_SERVICE_KEY=your_key
+TAVILY_API_KEY=your_key (optional for web search)
+```
+
+### 2. Launching with Docker
+```bash
+docker-compose up --build -d
+```
+The portal will be available at: `http://localhost:8000/portal`
+
+---
+
+## 🧪 Industry Standard Testing (CI)
+Aegis includes a comprehensive test suite covering Auth, RAG accuracy, and Agent concurrency.
+```bash
+pytest engine/tests/test_production.py
+```
+
+---
+
+## 🛡️ License & Safety
+Aegis is built for **Professional Use**. Always verify AI-generated insights against primary legal sources.
+*   **Version**: 1.0.0 (Genesis)
+*   **Build Status**: Passing (Aegis-v2)

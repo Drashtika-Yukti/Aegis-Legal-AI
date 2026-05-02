@@ -20,3 +20,5 @@ class AgentState(TypedDict):
     hallucination_detected: bool
     # Extracted facts
     facts: List[str]
+    # Context from helper tools
+    utility_context: str

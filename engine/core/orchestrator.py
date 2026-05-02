@@ -6,52 +6,61 @@ from core.logger import get_logger
 
 logger = get_logger("AegisEngine")
 
-def run_aegis(query: str, session_id: str = "default"):
+async def run_aegis_stream(query: str, session_id: str = "default"):
     """
-    Aegis Master Entry Point.
+    Aegis Master Entry Point (Streaming).
+    Yields JSON events for the frontend.
     """
-    logger.info(f"Session {session_id} | Processing query.")
+    logger.info(f"Session {session_id} | Starting stream.")
 
-    # 1. Routing
-    intent_result = router.route(query)
-    
-    if intent_result.category == "GREETING":
-        return {
-            "answer": "Hello! I am Aegis, your Legal Intelligence Assistant. How can I help you today?", 
-            "intent": "GREETING",
-            "hallucination_check": True
-        }
-
-    # 2. Agentic reasoning
     try:
-        history = memory.get_history(session_id)
-        chat_messages = [HumanMessage(content=msg["content"]) for msg in history]
-
-        result = nexus_graph.invoke({
-            "original_query": query,
-            "messages": chat_messages
-        })
-
-        # 3. Persistence & Fallback
-        final_ans = result.get("final_answer", "I am sorry, but I could not find relevant legal information in the current document to answer your request accurately.")
+        # 1. Routing Status
+        yield {"type": "status", "content": "Analyzing legal intent..."}
+        intent_result = router.route(query)
         
-        memory.add_message(session_id, "user", query)
-        memory.add_message(session_id, "assistant", final_ans)
+        if intent_result.category == "GREETING":
+            yield {"type": "token", "content": "Hello! I am Aegis, your Legal Intelligence Assistant. How can I help you today?"}
+            return
 
-        return {
-            "answer": final_ans,
-            "intent": intent_result.category,
-            "hallucination_check": not result.get("hallucination_detected", False),
-            "documents": result.get("documents", [])
-        }
+        # 2. Graph Streaming
+        # We use astream_events to catch tokens from the 'generate' node
+        async for event in nexus_graph.astream_events(
+            {"original_query": query, "messages": []},
+            version="v2"
+        ):
+            kind = event["event"]
+            node = event.get("metadata", {}).get("langgraph_node", "")
+
+            # Stream Status Updates
+            if kind == "on_chain_start" and node:
+                status_map = {
+                    "mask": "Shielding sensitive identifiers...",
+                    "retrieve": "Searching law library...",
+                    "grade": "Verifying document relevance...",
+                    "generate": "Drafting legal insight...",
+                    "judge": "Performing hallucination check..."
+                }
+                if node in status_map:
+                    yield {"type": "status", "content": status_map[node]}
+
+            # Stream Chat Tokens (from the generate node)
+            if kind == "on_chat_model_stream" and node == "generate":
+                content = event["data"]["chunk"].content
+                if content:
+                    yield {"type": "token", "content": content}
+
+            # Final Data (from the end of the chain)
+            if kind == "on_chain_end" and node == "unmask":
+                result = event["data"]["output"]
+                yield {
+                    "type": "final",
+                    "documents": result.get("documents", []),
+                    "hallucination_check": not result.get("hallucination_detected", False)
+                }
+
     except Exception as e:
-        logger.error(f"Engine Error: {str(e)}")
-        error_msg = "A technical error occurred. Please ensure all API keys (Groq, Cohere) are correctly configured in the .env file."
-        if "rate_limit_exceeded" in str(e).lower():
-            error_msg = "The system is currently experiencing high traffic (Rate Limit Reached). Please try again in a few seconds."
-        
-        return {
-            "answer": error_msg,
-            "intent": "ERROR",
-            "hallucination_check": False
+        logger.error(f"Stream Error: {str(e)}", exc_info=True)
+        yield {
+            "type": "error",
+            "content": "Aegis has encountered a legal paradox. Our scribes are resolving the conflict."
         }
